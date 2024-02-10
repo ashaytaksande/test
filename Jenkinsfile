@@ -8,7 +8,7 @@ pipeline {
         stage('checkout') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'Develop', url: 'https://github.com/ashaytaksande/test.git'
+                git url: 'https://github.com/ashaytaksande/test.git'
                 sh 'whoami'
             }
         }
