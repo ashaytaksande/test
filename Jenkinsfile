@@ -11,6 +11,8 @@ pipeline {
                // scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no <src_directory> ${env.TEST_SERVER_HOST}:<destination_directory>
                // """
                   sh ' echo "code pushed to the test branch" '
+                  sh 'git branch'
+                  sh 'git branch -r'
             }
         }
 
