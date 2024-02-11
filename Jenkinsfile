@@ -21,7 +21,7 @@ pipeline {
          //   }
             when {
                 expression {
-                    return env.BRANCH_NAME == 'test'
+                    return env.BRANCH_NAME == 'origin/test'
                 }
             }
             steps {
@@ -42,7 +42,7 @@ pipeline {
           //  }
             when {
                 expression {
-                    return env.BRANCH_NAME == 'prod'
+                    return env.BRANCH_NAME == 'origin/prod'
                 }
             }
             steps {
