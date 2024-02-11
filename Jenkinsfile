@@ -1,7 +1,7 @@
 // Place this file (Jenkinsfile) in your Git repository
 
 pipeline {
-    agent none
+    agent any
 
     //environment {
         // Define environment variables (optional)
@@ -16,9 +16,9 @@ pipeline {
 
     stages {
         stage('Copy files to test server') {
-            agent { 
-                label 'test'
-            }
+            //agent { 
+          //      label 'test'
+         //   }
             when {
                 expression {
                     return env.BRANCH_NAME == 'test'
@@ -37,9 +37,9 @@ pipeline {
         }
 
         stage('Copy files to prod server') {
-            agent { 
-                label 'prod'
-            }
+           // agent { 
+          //      label 'prod'
+          //  }
             when {
                 expression {
                     return env.BRANCH_NAME == 'prod'
