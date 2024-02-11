@@ -42,7 +42,7 @@ pipeline {
             }
             when {
                 expression {
-                    return env.BRANCH_NAME == 'master'
+                    return env.BRANCH_NAME == 'prod'
                 }
             }
             steps {
