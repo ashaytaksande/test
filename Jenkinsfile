@@ -24,7 +24,7 @@ pipeline {
             }
             steps {
                 // Get the latest code from the repository
-                git branch: env.BRANCH_NAME , url: https://github.com/ashaytaksande/test.git
+                git branch: env.BRANCH_NAME , url: 'https://github.com/ashaytaksande/test.git'
 
                 // Use SCP for secure file transfer
                // sh """
@@ -43,7 +43,7 @@ pipeline {
             }
             steps {
                 // Get the latest code from the repository
-                git branch: env.BRANCH_NAME , url: https://github.com/ashaytaksande/test.git
+                git branch: env.BRANCH_NAME , url: 'https://github.com/ashaytaksande/test.git'
 
                 // Use SCP for secure file transfer
                // sh """
