@@ -1,24 +1,57 @@
+// Place this file (Jenkinsfile) in your Git repository
+
 pipeline {
-    agent any
+    agent none
+
     environment {
-        sshkey=credentials('key')
+        // Define environment variables (optional)
+        // TEST_SERVER_HOST = 'your_test_server_host'
+        // PROD_SERVER_HOST = 'your_prod_server_host'
     }
 
+    // Remove the pollSCM trigger
+    // triggers {
+    //     pollSCM '* * * *'
+    // }
+
     stages {
-        stage('checkout') {
+        stage('Copy files to test server') {
+            agent test
+            when {
+                expression {
+                    return env.BRANCH_NAME == 'test'
+                }
+            }
             steps {
-                // Get some code from a GitHub repository
-                git url: 'https://github.com/ashaytaksande/test.git'
-                sh 'whoami'
+                // Get the latest code from the repository
+                git branch: env.BRANCH_NAME , url: https://github.com/ashaytaksande/test.git
+
+                // Use SCP for secure file transfer
+               // sh """
+               // scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no <src_directory> ${env.TEST_SERVER_HOST}:<destination_directory>
+               // """
+                  sh ' echo "code pushed to the test branch" '
             }
         }
-        stage('copy git files to test server') {
-            steps {
-                sh 'ls -al'
-                sh 'scp -i ${sshkey} -p -r $(pwd) ubuntu@ec2-44-201-117-222.compute-1.amazonaws.com:/home/ubuntu/ass'
+
+        stage('Copy files to prod server') {
+            agent prod
+            when {
+                expression {
+                    return env.BRANCH_NAME == 'master'
+                }
             }
-        }
-            
+            steps {
+                // Get the latest code from the repository
+                git branch: env.BRANCH_NAME , url: https://github.com/ashaytaksande/test.git
+
+                // Use SCP for secure file transfer
+               // sh """
+               // scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no <src_directory> ${env.PROD_SERVER_HOST}:<destination_directory>
+               // """
+                 sh ' echo "code pushed to the prod branch" '
+            }
         }
     }
+}
 
