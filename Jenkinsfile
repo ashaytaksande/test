@@ -16,7 +16,9 @@ pipeline {
 
     stages {
         stage('Copy files to test server') {
-            agent test
+            agent { 
+                label 'test'
+            }
             when {
                 expression {
                     return env.BRANCH_NAME == 'test'
@@ -35,7 +37,9 @@ pipeline {
         }
 
         stage('Copy files to prod server') {
-            agent prod
+            agent { 
+                label 'prod'
+            }
             when {
                 expression {
                     return env.BRANCH_NAME == 'master'
