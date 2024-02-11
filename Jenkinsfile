@@ -3,11 +3,11 @@
 pipeline {
     agent none
 
-    environment {
+    //environment {
         // Define environment variables (optional)
         // TEST_SERVER_HOST = 'your_test_server_host'
         // PROD_SERVER_HOST = 'your_prod_server_host'
-    }
+    //}
 
     // Remove the pollSCM trigger
     // triggers {
