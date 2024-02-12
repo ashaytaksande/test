@@ -16,7 +16,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'echo ${pwd}'
+                sh "echo ${pwd}"
                 sh '''
                 scp -i ${key} $(pwd) ubuntu@ec2-3-95-163-23.compute-1.amazonaws.com:home/
                 '''
