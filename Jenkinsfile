@@ -15,13 +15,18 @@ pipeline {
     // }
 
     stages {
+        stage('echo variables') {
+            steps {
+                sh 'echo ${env.BRANCH_NAME}'
+            }
+        }
         stage('Copy files to test server') {
             //agent { 
           //      label 'test'
          //   }
             when {
                 expression {
-                    return env.BRANCH_NAME == '(* test)'
+                    return env.BRANCH_NAME == '(test)'
                 }
             }
             steps {
