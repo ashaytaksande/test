@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         branchName = "${env.GIT_BRANCH.split('/').size() == 1 ? env.GIT_BRANCH.split('/')[-1] : env.GIT_BRANCH.split('/')[1..-1].join('/')}"
+        key = credentials('key')
     }
     stages {
         stage('Copy files to test server') {
@@ -15,12 +16,11 @@ pipeline {
                 }
             }
             steps {
-                ///sh """
-                /// scp -i
-                /// """
+                sh '''
+                scp -r -i ${key} $(pwd) ubuntu@ec2-3-95-163-23.compute-1.amazonaws.com:/home/ubuntu/test/
+                '''
                 sh ' echo "code pushed to the test branch" '
-                sh 'pwd'
-                sh 'ls -al'
+               
             }
         }
 
@@ -34,9 +34,9 @@ pipeline {
                 }
             }
             steps {
-                ///sh """
-                ///scp -i
-                /// """
+                 sh '''
+                scp -r -i ${key} $(pwd) ubuntu@ec2-3-95-163-23.compute-1.amazonaws.com:/home/ubuntu/prod
+                '''
                 sh ' echo "code pushed to the prod branch" '
             }
         }
