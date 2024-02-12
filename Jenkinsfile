@@ -1,14 +1,13 @@
 pipeline {
     agent any
-    environment {
-        branchName = '${env.GIT_BRANCH}'
-    }
+    
 
-    //environment {
+    environment {
+        env.BRANCH_NAME = scm.branches[0].name
         // Define environment variables (optional)
         // TEST_SERVER_HOST = 'your_test_server_host'
         // PROD_SERVER_HOST = 'your_prod_server_host'
-    //}
+    }
 
     // Remove the pollSCM trigger
     // triggers {
@@ -18,6 +17,10 @@ pipeline {
     stages {
         stage('Print branch name') {
             steps {
+                script {
+                    branchName = sh(label: 'getBranchName', returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                    println branchName
+                }
                 sh "echo ${branchName}"
             }
         }
