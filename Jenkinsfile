@@ -9,6 +9,7 @@ pipeline {
         steps {
             echo "Branch name: ${branchName}"
         }
+    }
 
     //environment {
         // Define environment variables (optional)
