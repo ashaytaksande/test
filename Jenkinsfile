@@ -5,11 +5,7 @@ pipeline {
     environment {
         branchName = "${env.GIT_BRANCH}"
     }
-    stage('Print branch name') {
-        steps {
-            echo "Branch name: ${branchName}"
-        }
-    }
+    
 
     //environment {
         // Define environment variables (optional)
@@ -23,6 +19,11 @@ pipeline {
     // }
 
     stages {
+        stage('Print branch name') {
+        steps {
+            echo "Branch name: ${branchName}"
+        }
+    }
         stage('echo variables') {
             steps {
                 sh "echo ${env.BRANCH_NAME}"
