@@ -2,7 +2,7 @@
 
 pipeline {
     agent any
-    env {
+    environment {
         branchName = "${env.GIT_BRANCH}"
     }
     stage('Print branch name') {
