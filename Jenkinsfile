@@ -1,5 +1,3 @@
-// Place this file (Jenkinsfile) in your Git repository
-
 pipeline {
     agent any
     environment {
@@ -19,9 +17,9 @@ pipeline {
 
     stages {
         stage('Print branch name') {
-        steps {
-            sh "echo "Branch name: ${branchName}""
-        }
+            steps {
+                sh "echo Branch name: ${branchName}"
+            }
         }
         stage('echo variables') {
             steps {
@@ -29,7 +27,7 @@ pipeline {
             }
         }
         stage('Copy files to test server') {
-            //agent { 
+            //agent {
             //      label 'test'
             //   }
             when {
@@ -41,16 +39,16 @@ pipeline {
                 // Get the latest code from the repository
                 git branch: env.BRANCH_NAME , url: 'https://github.com/ashaytaksande/test.git'
 
-                  // Use SCP for secure file transfer
-                  // sh """
-                  // scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no <src_directory> ${env.TEST_SERVER_HOST}:<destination_directory>
-                  // """
-                  sh ' echo "code pushed to the test branch" '
+                // Use SCP for secure file transfer
+                // sh """
+                // scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no <src_directory> ${env.TEST_SERVER_HOST}:<destination_directory>
+                // """
+                sh ' echo "code pushed to the test branch" '
             }
         }
 
         stage('Copy files to prod server') {
-            // agent { 
+            // agent {
             //      label 'prod'
             //  }
             when {
@@ -62,11 +60,11 @@ pipeline {
                 // Get the latest code from the repository
                 git branch: env.BRANCH_NAME , url: 'https://github.com/ashaytaksande/test.git'
 
-                 // Use SCP for secure file transfer
-                 // sh """
-                 // scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no <src_directory> ${env.PROD_SERVER_HOST}:<destination_directory>
-                 // """
-                 sh ' echo "code pushed to the prod branch" '
+                // Use SCP for secure file transfer
+                // sh """
+                // scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no <src_directory> ${env.PROD_SERVER_HOST}:<destination_directory>
+                // """
+                sh ' echo "code pushed to the prod branch" '
             }
         }
     }
