@@ -14,14 +14,11 @@ pipeline {
     // }
 
     stages {
-        
-        
+           
         stage('echo variables') {
             steps {
-                 steps {
-                
+              
                 sh "echo ${branchName}"
-            }
                 sh "echo ${env.BRANCH_NAME}"
             }
         }
