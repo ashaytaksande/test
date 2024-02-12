@@ -2,6 +2,13 @@
 
 pipeline {
     agent any
+    env {
+        branchName = "${env.GIT_BRANCH}"
+    }
+    stage('Print branch name') {
+        steps {
+            echo "Branch name: ${branchName}"
+        }
 
     //environment {
         // Define environment variables (optional)
