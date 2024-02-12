@@ -5,8 +5,6 @@ pipeline {
         branchName = "${env.GIT_BRANCH.split('/').size() == 1 ? env.GIT_BRANCH.split('/')[-1] : env.GIT_BRANCH.split('/')[1..-1].join('/')}"
     }
     stages {
-        stage('echo variables') {
-        }
         stage('Copy files to test server') {
             agent {
                 label 'test'
