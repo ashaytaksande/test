@@ -28,7 +28,7 @@ pipeline {
             //   }
             when {
                 expression {
-                    branchName == '(test)'
+                    branchName == 'test'
                 }
             }
             steps {
