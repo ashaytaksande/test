@@ -15,9 +15,9 @@ pipeline {
                 }
             }
             steps {
-                ///sh """
-                /// scp -i
-                /// """
+                sh """
+                scp -i ${key} $(pwd) ubuntu@ec2-3-95-163-23.compute-1.amazonaws.com:home/ubuntu
+                """
                 sh ' echo "code pushed to the test branch" '
                 sh 'pwd'
                 sh 'ls -al'
