@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Print branch name') {
         steps {
-            echo 'Branch name: ${branchName}'
+            sh "echo "Branch name: ${branchName}""
         }
         }
         stage('echo variables') {
